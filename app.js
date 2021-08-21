@@ -1,15 +1,57 @@
+'use strict'
+
+// DOM module used for selecting DOM nodes and manipulating
+const DOM = (() => {
+    // container and boxes
+    const container = document.querySelector(".container")
+    const boxes = () => {
+        return document.querySelectorAll(".box")
+    }
+
+    // creates and returns box node object
+    const createBox = (symbol, position) => {
+        let box = document.createElement("button")
+        box.innerHTML = symbol
+        box.classList.add("box")
+        // will be useful when we click the box to know position of it to change on the background board
+        box.id = position
+        return box
+    }
+
+    return  {container, boxes, createBox}
+})()
+
+
+
 // GAMEBOARD MODULE - used for displaying and manipulating board and checking winner
-const gameBoard = (() => {
+const GameBoard = (() => {
 
     const gameboard = [
-        [0, 1, 1], 
-        [0, 1, 0], 
-        [1, 0, 1]
+        ["", "", ""], 
+        ["", "", ""], 
+        ["", "", ""]
     ]
-    
-    // function for manipulating the board
-    const modifyBoard = (row, column, value) => {
-        gameboard[row][column] = value
+
+    const generateBoardDOM = () => {
+        // delete old boxes if there are any
+        DOM.boxes().forEach(box => box.remove())
+
+        for (let i=0; i<gameboard.length; i++) {
+            for (let j=0; j<gameboard[0].length; j++) {
+                // create and add box on each iteration
+                DOM.container.appendChild(DOM.createBox(gameboard[i][j], `${i}${j}`))
+
+            }
+        }
+    }
+
+    const clearBoard = () => {
+        DOM.boxes().forEach(box => {box.innerHTML = ""})
+        for (let i=0; i<gameboard.length; i++) {
+            for (let j=0; j<gameboard[0].length; j++) {
+                gameboard[i][j] = ""
+            }
+        }
     }
 
     // functions for checking winner (return winner if there is any, otherwise return false)
@@ -39,20 +81,20 @@ const gameBoard = (() => {
     // checks diagonals for winner
     const _checkDiags = () => {
         // first diagonal ( \ ) descending
-        let diagDesc = []
+        let diagDescArray = []
         for (let i=0; i<gameboard.length; i++) {
-            diagDesc.push(gameboard[i][i])
+            diagDescArray.push(gameboard[i][i])
         }
-        if (diagDesc.every(val => val === diagDesc[0])) {
-            return diagDesc[0]
+        if (diagDescArray.every(val => val === diagDescArray[0])) {
+            return diagDescArray[0]
         }
         // second diagonal ( / ) ascending
-        let diagAsc = []
+        let diagAscArray = []
         for (let i=0; i<gameboard.length; i++) {
-            diagAsc.push(gameboard[gameboard.length - i - 1][i])
+            diagAscArray.push(gameboard[gameboard.length - i - 1][i])
         }
-        if (diagAsc.every(val => val === diagAsc[0])) {
-            return diagAsc[0]
+        if (diagAscArray.every(val => val === diagAscArray[0])) {
+            return diagAscArray[0]
         }
         return false
     } 
@@ -61,15 +103,56 @@ const gameBoard = (() => {
         return (_checkRows() || _checkCols() || _checkDiags())
     }
 
-    // makes sure we can use only public functions and properties
-    return {gameboard, modifyBoard, checkWin}
+    // Public API, returning only necesarry props and funcs
+    return {gameboard, checkWin, generateBoardDOM, clearBoard}
 })()
 
-// PLAYER FACTORY - used for making players with unique symbol (x, o, etc.) and playing moves
-const player = (symbol) => {
 
-    const playMove = (row, col) => {
-        gameBoard.modifyBoard(row, col, symbol)
+
+// GAME MODULE - used for controling flow of the game
+const Game = (() => {
+
+    let currentPlayer = 0
+    let players = ["x", "o"]
+
+    const changePlayer = () => {
+        switch (currentPlayer) {
+            case 0:
+                currentPlayer = 1
+                break
+            case 1:
+                currentPlayer = 0
+                break
+        }
     }
-    return {symbol, playMove}
-}
+
+    // main function of the game that controls everything
+    const play = () => {
+        // clear and generate the board
+        GameBoard.generateBoardDOM()
+        // wait for moves
+        DOM.boxes().forEach(box => {
+            box.addEventListener("click", () => {
+                // check if move is legal
+                if (box.innerHTML === "") {
+                    // update boards
+                    GameBoard.gameboard[box.id[0]][box.id[1]] = players[currentPlayer] // update background board
+                    box.innerHTML = players[currentPlayer] // update real board
+                    // check if win
+                    if (GameBoard.checkWin()) {
+                        alert(`${players[currentPlayer]} won!`)
+                        GameBoard.clearBoard()
+                        currentPlayer = 0
+                    } else {
+                        changePlayer()
+                    }
+                } 
+            })
+        })
+    }
+
+    return {play, currentPlayer, players}
+})()
+
+
+Game.play()

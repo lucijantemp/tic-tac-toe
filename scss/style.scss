@@ -3,3 +3,34 @@
     margin: 0;
     box-sizing: border-box;
 }
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+.container {
+    display: grid;
+    background-color: #707070;
+    width: 50%;
+    height: 50%;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    .box {
+        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 5rem;
+
+        &:hover {
+            cursor: pointer;
+            background-color: #7c7c7c;
+        }
+    }
+}
