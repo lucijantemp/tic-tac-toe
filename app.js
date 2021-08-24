@@ -2,11 +2,16 @@
 
 // DOM module used for selecting DOM nodes and manipulating
 const DOM = (() => {
-    // container and boxes
+    // node elements
     const container = document.querySelector(".container")
     const boxes = () => {
         return document.querySelectorAll(".box")
     }
+    const btnRestart = document.querySelector(".btn-restart")
+    const msg = document.querySelector(".msg")
+
+    const score0 = document.querySelector(".score0")
+    const score1 = document.querySelector(".score1")
 
     // creates and returns box node object
     const createBox = (symbol, position) => {
@@ -18,7 +23,7 @@ const DOM = (() => {
         return box
     }
 
-    return  {container, boxes, createBox}
+    return  {container, boxes, msg, score0, score1, createBox, btnRestart}
 })()
 
 
@@ -32,6 +37,28 @@ const GameBoard = (() => {
         ["", "", ""]
     ]
 
+    const _removeBorders = () => {
+        DOM.boxes().forEach(box => {
+            // remove top and bottom borders
+            switch (box.id[0]) {
+                case "0":
+                    box.style.borderTop = "none"
+                    break
+                case `${gameboard.length-1}`:
+                    box.style.borderBottom = "none"
+                    break
+            }
+            switch (box.id[1]) {
+                case "0":
+                    box.style.borderLeft = "none"
+                    break
+                case `${gameboard[0].length-1}`:
+                    box.style.borderRight = "none"
+                    break
+            }
+        })
+    }
+
     const generateBoardDOM = () => {
         // delete old boxes if there are any
         DOM.boxes().forEach(box => box.remove())
@@ -43,6 +70,7 @@ const GameBoard = (() => {
 
             }
         }
+        _removeBorders()
     }
 
     const clearBoard = () => {
@@ -52,6 +80,12 @@ const GameBoard = (() => {
                 gameboard[i][j] = ""
             }
         }
+    }
+
+    const freeze = () => {
+        DOM.boxes().forEach(box => {
+            box.disabled = true
+        })
     }
 
     // functions for checking winner (return winner if there is any, otherwise return false)
@@ -102,9 +136,13 @@ const GameBoard = (() => {
     const checkWin = () => {
         return (_checkRows() || _checkCols() || _checkDiags())
     }
+    // returns true if board is full and nobody won (tie)
+    const checkTie = () => {
+        return Array.from(DOM.boxes()).every(box => box.innerHTML != "")
+    }
 
     // Public API, returning only necesarry props and funcs
-    return {gameboard, checkWin, generateBoardDOM, clearBoard}
+    return {gameboard, checkWin, checkTie, generateBoardDOM, clearBoard, freeze}
 })()
 
 
@@ -126,6 +164,16 @@ const Game = (() => {
         }
     }
 
+    // clears both boards, reset current player, clear msg, enable boxes
+    const reset = () => {
+        GameBoard.clearBoard()
+        currentPlayer = 0
+        DOM.msg.innerHTML = ""
+        DOM.boxes().forEach(box => {
+            box.disabled = false
+        })
+    }
+
     // main function of the game that controls everything
     const play = () => {
         // clear and generate the board
@@ -140,15 +188,38 @@ const Game = (() => {
                     box.innerHTML = players[currentPlayer] // update real board
                     // check if win
                     if (GameBoard.checkWin()) {
-                        alert(`${players[currentPlayer]} won!`)
-                        GameBoard.clearBoard()
-                        currentPlayer = 0
-                    } else {
+                        DOM.msg.innerHTML = `${players[currentPlayer]} won!`
+                        GameBoard.freeze()
+                        switch (currentPlayer) {
+                            case 0:
+                                if (DOM.score0.innerHTML == "_") {
+                                    DOM.score0.innerHTML = 1
+                                } else {
+                                    DOM.score0.innerHTML = parseInt(DOM.score0.innerHTML) + 1
+                                }
+                                break
+                            case 1:
+                                if (DOM.score1.innerHTML == "_") {
+                                    DOM.score1.innerHTML = 1
+                                } else {
+                                    DOM.score1.innerHTML = parseInt(DOM.score1.innerHTML) + 1
+                                }
+                        }
+                    }
+                    // check if tie
+                    else if (GameBoard.checkTie()) {
+                        DOM.msg.innerHTML = "It's a tie"
+                    } 
+                    // no win, no tie => change player (game continues)
+                    else {
                         changePlayer()
                     }
                 } 
             })
         })
+
+        // restart button
+        DOM.btnRestart.addEventListener("click", reset)
     }
 
     return {play, currentPlayer, players}

@@ -13,6 +13,19 @@ body {
     width: 100vw;
 }
 
+.score-container {
+    width: 400px;
+    display: flex;
+    margin-bottom: 20px;
+
+    .score-mini {
+        width: 50%;
+        display: flex;
+        justify-content: space-around;
+        font-size: 3rem;
+    }
+}
+
 .container {
     display: grid;
     background-color: #707070;
@@ -32,5 +45,16 @@ body {
             cursor: pointer;
             background-color: #7c7c7c;
         }
+    }
+}
+
+.btn-restart {
+    width: 100px;
+    height: 45px;
+    font-size: 1rem;
+    margin: 20px;
+
+    &:hover {
+        cursor: pointer;
     }
 }
