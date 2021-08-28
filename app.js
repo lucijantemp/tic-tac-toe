@@ -188,7 +188,7 @@ const Game = (() => {
                     box.innerHTML = players[currentPlayer] // update real board
                     // check if win
                     if (GameBoard.checkWin()) {
-                        DOM.msg.innerHTML = `${players[currentPlayer]} won!`
+                        DOM.msg.innerHTML = `<span class='msg-capital'>${players[currentPlayer]}</span> won!`
                         GameBoard.freeze()
                         switch (currentPlayer) {
                             case 0:
@@ -209,6 +209,7 @@ const Game = (() => {
                     // check if tie
                     else if (GameBoard.checkTie()) {
                         DOM.msg.innerHTML = "It's a tie"
+                        GameBoard.freeze()
                     } 
                     // no win, no tie => change player (game continues)
                     else {

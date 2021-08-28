@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Poppins';
 }
 
 body {
@@ -11,6 +12,7 @@ body {
     flex-direction: column;
     height: 100vh;
     width: 100vw;
+    min-width: 350px;
 }
 
 .score-container {
@@ -23,14 +25,15 @@ body {
         display: flex;
         justify-content: space-around;
         font-size: 3rem;
+        align-items: flex-end;
     }
 }
 
 .container {
     display: grid;
     background-color: #707070;
-    width: 50%;
-    height: 50%;
+    width: 600px;
+    height: 600px;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr;
 
@@ -56,5 +59,23 @@ body {
 
     &:hover {
         cursor: pointer;
+    }
+}
+
+.msg-capital {
+    font-size: 2.5rem;
+}
+
+@media (max-width: 1100px) {
+    .container {
+        height: 500px;
+        width: 500px;
+    }
+}
+
+@media (max-width: 500px) {
+    .container {
+        height: 350px;
+        width: 350px;
     }
 }
