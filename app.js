@@ -48,6 +48,7 @@ const GameBoard = (() => {
                     box.style.borderBottom = "none"
                     break
             }
+            // remove left and right borders
             switch (box.id[1]) {
                 case "0":
                     box.style.borderLeft = "none"
