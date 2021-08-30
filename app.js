@@ -13,6 +13,8 @@ const DOM = (() => {
     const score0 = document.querySelector(".score0")
     const score1 = document.querySelector(".score1")
 
+    const winnerLine = document.querySelector(".winner-line")
+
     // creates and returns box node object
     const createBox = (symbol, position) => {
         let box = document.createElement("button")
@@ -23,7 +25,7 @@ const DOM = (() => {
         return box
     }
 
-    return  {container, boxes, msg, score0, score1, createBox, btnRestart}
+    return  {container, boxes, msg, score0, score1, winnerLine, createBox, btnRestart}
 })()
 
 
@@ -94,8 +96,9 @@ const GameBoard = (() => {
     const _checkRows = () => {
         for (let i=0; i<gameboard.length; i++) {
             let row = gameboard[i]
-            if (row.every(val => val === row[0])) {
-                return row[0]
+            let rowNumber = i // used to indicate which row is winner, which will modify winner line
+            if (row[0] && row.every(val => val === row[0])) {
+                return [row[0], `row-${rowNumber}`]
             }
         } 
         return false
@@ -104,11 +107,13 @@ const GameBoard = (() => {
     const _checkCols = () => {
         for (let i=0; i<gameboard[0].length; i++) {
             let column = []
+            let columnNumber = i // used to indicate which column is winner, which will modify winner line
             for (let j=0; j<gameboard.length; j++) {
                 column.push(gameboard[j][i])
             }
-            if (column.every(val => val === column[0])) {
-                return column[0]
+            if (column[0] && column.every(val => val === column[0])) {
+
+                return [column[0], `column-${columnNumber}`] 
             }
         }
         return false
@@ -120,16 +125,16 @@ const GameBoard = (() => {
         for (let i=0; i<gameboard.length; i++) {
             diagDescArray.push(gameboard[i][i])
         }
-        if (diagDescArray.every(val => val === diagDescArray[0])) {
-            return diagDescArray[0]
+        if (diagDescArray[0] && diagDescArray.every(val => val === diagDescArray[0])) {
+            return [diagDescArray[0], 'diagonal-desc']
         }
         // second diagonal ( / ) ascending
         let diagAscArray = []
         for (let i=0; i<gameboard.length; i++) {
             diagAscArray.push(gameboard[gameboard.length - i - 1][i])
         }
-        if (diagAscArray.every(val => val === diagAscArray[0])) {
-            return diagAscArray[0]
+        if (diagAscArray[0] && diagAscArray.every(val => val === diagAscArray[0])) {
+            return [diagAscArray[0], 'diagonal-asc']
         }
         return false
     } 
@@ -173,6 +178,11 @@ const Game = (() => {
         DOM.boxes().forEach(box => {
             box.disabled = false
         })
+        // reset winner line position
+        DOM.winnerLine.style.top = "50%"
+        DOM.winnerLine.style.display = "none"
+        DOM.winnerLine.style.transform = "none"
+        DOM.winnerLine.style.left = "0"
     }
 
     // main function of the game that controls everything
@@ -189,8 +199,49 @@ const Game = (() => {
                     box.innerHTML = players[currentPlayer] // update real board
                     // check if win
                     if (GameBoard.checkWin()) {
+                        // update winner line based on position of win (3 same elements in a row, col or diag)
+                        switch (GameBoard.checkWin()[1]) {
+                            case 'row-0':
+                                DOM.winnerLine.style.display = 'block'
+                                DOM.winnerLine.style.top = '16.667%'
+                                break
+                            case 'row-1':
+                                DOM.winnerLine.style.display = 'block'
+                                DOM.winnerLine.style.top = '50%'
+                                break
+                            case 'row-2':
+                                DOM.winnerLine.style.display = 'block'
+                                DOM.winnerLine.style.top = '83.333%'
+                                break    
+                            case 'column-0':
+                                DOM.winnerLine.style.transform = 'rotate(90deg)'
+                                DOM.winnerLine.style.display = 'block'
+                                DOM.winnerLine.style.left = '-33.333%'
+                                break
+                            case 'column-1':
+                                DOM.winnerLine.style.transform = 'rotate(90deg)'
+                                DOM.winnerLine.style.display = 'block'
+                                DOM.winnerLine.style.left = '0'
+                                break
+                            case 'column-2':
+                                DOM.winnerLine.style.transform = 'rotate(90deg)'
+                                DOM.winnerLine.style.display = 'block'
+                                DOM.winnerLine.style.left = '33.333%'
+                                break
+                            case 'diagonal-asc':
+                                DOM.winnerLine.style.transform = 'rotate(135deg)'
+                                DOM.winnerLine.style.display = 'block'
+                                break
+                            case 'diagonal-desc':
+                                DOM.winnerLine.style.transform = 'rotate(45deg)'
+                                DOM.winnerLine.style.display = 'block'
+                                break
+                        }
+                        // display message (who won or tie)
                         DOM.msg.innerHTML = `<span class='msg-capital'>${players[currentPlayer]}</span> won!`
+                        // freeze gameboard (not allow any clicks before game is restarted)
                         GameBoard.freeze()
+                        // update score
                         switch (currentPlayer) {
                             case 0:
                                 if (DOM.score0.innerHTML == "_") {
