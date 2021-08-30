@@ -13,6 +13,7 @@ body {
     height: 100vh;
     width: 100vw;
     min-width: 350px;
+    overflow-x: hidden;
 }
 
 .score-container {
@@ -25,11 +26,6 @@ body {
         justify-content: space-around;
         font-size: 3rem;
         align-items: flex-end;
-
-        h3 {
-            height: 78px;
-            font-weight: 600;
-        }
     }
 }
 
@@ -79,11 +75,13 @@ body {
 .msg {
     font-size: 2rem;
     font-weight: 500;
+
+    &-capital {
+        font-size: 3rem;
+    }
 }
 
-.msg-capital {
-    font-size: 3rem;
-}
+
 
 @media (max-width: 1100px) {
     .container {
@@ -108,4 +106,46 @@ body {
     }
 
     
+}
+
+// phone rotation
+@media (max-height: 720px) {
+    .container {
+        height: 350px;
+        width: 350px;
+
+        .box {
+            font-size: 4rem;
+            border: 6px solid black;
+        }
+    }
+}
+
+@media (max-height: 570px) {
+
+    .score-container {
+    
+        .score-mini {
+            font-size: 2.5rem;
+        }
+    }
+
+    .container {
+        height: 270px;
+        width: 270px;
+
+        .box {
+            font-size: 3rem;
+            border: 4px solid black;
+        }
+    }
+
+    .msg {
+        font-size: 1.3rem;
+        font-weight: 500;
+    
+        &-capital {
+            font-size: 2.2rem;
+        }
+    }
 }
