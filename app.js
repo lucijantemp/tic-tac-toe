@@ -200,41 +200,34 @@ const Game = (() => {
                     // check if win
                     if (GameBoard.checkWin()) {
                         // update winner line based on position of win (3 same elements in a row, col or diag)
+                        DOM.winnerLine.style.display = 'block'
                         switch (GameBoard.checkWin()[1]) {
                             case 'row-0':
-                                DOM.winnerLine.style.display = 'block'
                                 DOM.winnerLine.style.top = '16.667%'
                                 break
                             case 'row-1':
-                                DOM.winnerLine.style.display = 'block'
                                 DOM.winnerLine.style.top = '50%'
                                 break
                             case 'row-2':
-                                DOM.winnerLine.style.display = 'block'
                                 DOM.winnerLine.style.top = '83.333%'
                                 break    
                             case 'column-0':
                                 DOM.winnerLine.style.transform = 'rotate(90deg)'
-                                DOM.winnerLine.style.display = 'block'
                                 DOM.winnerLine.style.left = '-33.333%'
                                 break
                             case 'column-1':
                                 DOM.winnerLine.style.transform = 'rotate(90deg)'
-                                DOM.winnerLine.style.display = 'block'
                                 DOM.winnerLine.style.left = '0'
                                 break
                             case 'column-2':
                                 DOM.winnerLine.style.transform = 'rotate(90deg)'
-                                DOM.winnerLine.style.display = 'block'
                                 DOM.winnerLine.style.left = '33.333%'
                                 break
                             case 'diagonal-asc':
                                 DOM.winnerLine.style.transform = 'rotate(135deg)'
-                                DOM.winnerLine.style.display = 'block'
                                 break
                             case 'diagonal-desc':
                                 DOM.winnerLine.style.transform = 'rotate(45deg)'
-                                DOM.winnerLine.style.display = 'block'
                                 break
                         }
                         // display message (who won or tie)
