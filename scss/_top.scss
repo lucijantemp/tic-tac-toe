@@ -1,0 +1,12 @@
+.score-container {
+    width: 400px;
+    display: flex;
+
+    .score-mini {
+        width: 50%;
+        display: flex;
+        justify-content: space-around;
+        font-size: 3rem;
+        align-items: flex-end;
+    }
+}

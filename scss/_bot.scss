@@ -1,0 +1,21 @@
+.btn-restart {
+    width: 120px;
+    height: 50px;
+    font-size: 1.3rem;
+    background-color: transparent;
+    border: none;
+    letter-spacing: 3px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.msg {
+    font-size: 2rem;
+    font-weight: 500;
+
+    &-capital {
+        font-size: 3rem;
+    }
+}
