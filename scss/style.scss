@@ -28,6 +28,7 @@ body {
 
         h3 {
             height: 78px;
+            font-weight: 600;
         }
     }
 }
@@ -63,23 +64,35 @@ body {
 }
 
 .btn-restart {
-    width: 100px;
-    height: 45px;
-    font-size: 1rem;
+    width: 120px;
+    height: 50px;
+    font-size: 1.3rem;
+    background-color: transparent;
+    border: none;
+    letter-spacing: 3px;
 
     &:hover {
         cursor: pointer;
     }
 }
 
+.msg {
+    font-size: 2rem;
+    font-weight: 500;
+}
+
 .msg-capital {
-    font-size: 2.5rem;
+    font-size: 3rem;
 }
 
 @media (max-width: 1100px) {
     .container {
         height: 500px;
         width: 500px;
+
+        .box {
+            border: 8px solid black;
+        }
     }
 }
 
@@ -90,6 +103,7 @@ body {
 
         .box {
             font-size: 4rem;
+            border: 6px solid black;
         }
     }
 
