@@ -174,7 +174,7 @@ const Game = (() => {
     const reset = () => {
         GameBoard.clearBoard()
         currentPlayer = 0
-        DOM.msg.innerHTML = ""
+        DOM.msg.innerHTML = "Good luck!"
         DOM.boxes().forEach(box => {
             box.disabled = false
         })
@@ -183,6 +183,8 @@ const Game = (() => {
         DOM.winnerLine.style.display = "none"
         DOM.winnerLine.style.transform = "none"
         DOM.winnerLine.style.left = "0"
+        DOM.winnerLine.style.opacity = "0"
+
     }
 
     // main function of the game that controls everything
@@ -201,6 +203,7 @@ const Game = (() => {
                     if (GameBoard.checkWin()) {
                         // update winner line based on position of win (3 same elements in a row, col or diag)
                         DOM.winnerLine.style.display = 'block'
+                        setTimeout(() => DOM.winnerLine.style.opacity = 1, 100)
                         switch (GameBoard.checkWin()[1]) {
                             case 'row-0':
                                 DOM.winnerLine.style.top = '16.667%'
