@@ -33,6 +33,14 @@
 
 // phone rotation
 @media (max-height: 720px) {
+    .msg {
+        font-size: 1.8rem;
+
+        &-capital {
+            font-size: 2.6rem;
+        }
+    } 
+
     .container {
         height: 350px;
         width: 350px;
@@ -45,7 +53,6 @@
 }
 
 @media (max-height: 570px) {
-
     .score-container {
     
         .score-mini {
@@ -64,11 +71,6 @@
     }
 
     .msg {
-        font-size: 1.3rem;
-        font-weight: 500;
-    
-        &-capital {
-            font-size: 2.2rem;
-        }
+        display: none;
     }
 }
