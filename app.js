@@ -41,6 +41,17 @@ const Game = (() => {
 
     // main function of the game that controls everything
     const play = () => {
+        // add settings btn functionality
+        DOM.btnSettings.addEventListener("click", () => {
+            switch (getComputedStyle(DOM.settingsContainer).zIndex) {
+                case "1":
+                    DOM.settingsContainer.style.zIndex = "-1"
+                    break
+                case "-1":
+                    DOM.settingsContainer.style.zIndex = "1"
+                    break
+            }
+        })
         // clear and generate the board
         GameBoard.generateBoardDOM()
         // wait for moves

@@ -15,6 +15,9 @@ export const DOM = (() => {
 
     const winnerLine = document.querySelector(".winner-line")
 
+    const btnSettings = document.querySelector(".btn-settings")
+    const settingsContainer = document.querySelector(".settings-container")
+
     // creates and returns box node object
     const createBox = (symbol, position) => {
         let box = document.createElement("button")
@@ -25,6 +28,6 @@ export const DOM = (() => {
         return box
     }
 
-    return  {container, boxes, msg, score0, score1, winnerLine, createBox, btnRestart}
+    return  {container, boxes, msg, score0, score1, winnerLine, btnSettings, settingsContainer, createBox, btnRestart}
 })()
 

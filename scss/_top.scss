@@ -27,3 +27,12 @@
         transform: rotate(90deg);
     }
 }
+
+.settings-container {
+    position: absolute;
+    z-index: -1;
+    background-color: #ffffff;
+    border: 2px solid black;
+    width: 300px;
+    height: 500px;
+}
