@@ -10,3 +10,20 @@
         align-items: flex-end;
     }
 }
+
+.btn-settings {
+    position: absolute;
+    background-image: url('images/cog-solid.svg');
+    width: 35px;
+    height: 35px;
+    top: 8px;
+    right: 8px;
+    border: none;
+    background-color: transparent;
+    transition: transform 500ms;
+
+    &:hover {
+        cursor: pointer;
+        transform: rotate(90deg);
+    }
+}
