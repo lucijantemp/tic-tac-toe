@@ -11,8 +11,21 @@
     <title>tic-tac-toe</title>
 </head>
 <body>
+
     <button class="btn-settings"></button>
-    <div class="settings-container"></div>
+    <div class="settings-container">
+        <h2 class="settings-title">Settings</h2>
+        <label for="theme">
+           <p>Dark theme </p> <input type="checkbox" name="theme" id="theme">
+        </label>
+        <label for="bot">
+            <p>Play against bot </p> <input type="checkbox" name="bot" id="bot">
+         </label>
+         <p class="difficulty-container"><span>Select difficulty:</span><button class="btn-difficulty">EASY</button></p>
+         <button class="btn-reset-score">Reset score</button>
+         <p class="LDZoid">Made by LDZoid</p>
+    </div>
+
     <div class="score-container">
         <div class="score-mini">
             <span>X</span> <span class="score0">_</span>
@@ -21,13 +34,16 @@
             <span class="score1">_</span> <span>O</span>
         </div>
     </div>
+
     <div class="container-bg">
         <div class="container">
             <div class="winner-line"></div>
         </div>
     </div>
+
     <button class="btn-restart">RESTART</button>
     <h1 class="msg">Good luck!</h1>
+
     <script src="./app.js" type="module"></script>
 </body>
 </html>

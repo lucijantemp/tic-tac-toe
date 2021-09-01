@@ -1,7 +1,8 @@
 'use strict'
 
-import {DOM} from './scripts/DOM.js'
-import {GameBoard} from './scripts/gameboard.js'
+import { DOM } from './scripts/DOM.js'
+import { GameBoard } from './scripts/gameboard.js'
+import { Settings } from './scripts/settings.js'
 
 
 
@@ -41,17 +42,12 @@ const Game = (() => {
 
     // main function of the game that controls everything
     const play = () => {
+        // Initialize settings event listeners
         // add settings btn functionality
-        DOM.btnSettings.addEventListener("click", () => {
-            switch (getComputedStyle(DOM.settingsContainer).zIndex) {
-                case "1":
-                    DOM.settingsContainer.style.zIndex = "-1"
-                    break
-                case "-1":
-                    DOM.settingsContainer.style.zIndex = "1"
-                    break
-            }
-        })
+        DOM.btnSettings.addEventListener("click", Settings.toggleSettings)
+        // add reset score settings event listener
+        DOM.btnResetScore.addEventListener("click", Settings.resetScore)
+
         // clear and generate the board
         GameBoard.generateBoardDOM()
         // wait for moves
