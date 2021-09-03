@@ -15,6 +15,10 @@ body {
     min-width: 350px;
     overflow: hidden;
 }
+body.dark {
+         background-color: #16315b;
+         color: #bfbfbf;
+     }
 
 @import "top"; // everything above yellow container
 @import "mid"; // everything in yellow container
@@ -59,4 +63,3 @@ body {
 // .btn-difficulty {
 //     color: #fff;
 // }
-// apply .box borders to all media queries

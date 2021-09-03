@@ -42,15 +42,20 @@ const Game = (() => {
 
     // main function of the game that controls everything
     const play = () => {
-        // Initialize settings event listeners
-        // add settings btn functionality
-        DOM.btnSettings.addEventListener("click", Settings.toggleSettings)
-        // add reset score settings event listener
-        DOM.btnResetScore.addEventListener("click", Settings.resetScore)
 
         // clear and generate the board
         GameBoard.generateBoardDOM()
-        // wait for moves
+
+        // SETTINGS
+        // add settings btn functionality
+        DOM.btnSettings.addEventListener("click", Settings.toggleSettings)
+        // takes care of themes
+        Settings.changeTheme()
+        DOM.cboxChangeTheme.addEventListener("change", Settings.changeTheme)
+        // add reset score settings event listener
+        DOM.btnResetScore.addEventListener("click", Settings.resetScore)
+
+        // BOARD functionality
         DOM.boxes().forEach(box => {
             box.addEventListener("click", () => {
                 // check if move is legal

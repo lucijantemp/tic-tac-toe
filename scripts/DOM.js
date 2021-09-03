@@ -2,7 +2,7 @@
 
 // DOM module used for selecting DOM nodes and manipulating
 export const DOM = (() => {
-    // node elements
+    // relevant node elements
     const container = document.querySelector(".container")
     const boxes = () => {
         return document.querySelectorAll(".box")
@@ -17,6 +17,7 @@ export const DOM = (() => {
 
     const btnSettings = document.querySelector(".btn-settings")
     const settingsContainer = document.querySelector(".settings-container")
+    const cboxChangeTheme = document.querySelector(".checkbox-change-theme")
     const btnResetScore = document.querySelector(".btn-reset-score")
 
     // creates and returns box node object
@@ -29,6 +30,7 @@ export const DOM = (() => {
         return box
     }
 
-    return  {container, boxes, msg, score0, score1, winnerLine, btnSettings, settingsContainer, btnResetScore, createBox, btnRestart}
+    return  {container, boxes, msg, score0, score1, winnerLine, btnSettings, settingsContainer, cboxChangeTheme, 
+            btnResetScore, createBox, btnRestart}
 })()
 
