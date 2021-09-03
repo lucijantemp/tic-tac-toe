@@ -1,0 +1,42 @@
+body.dark {
+    background-color: #16315b;
+    color: #bfbfbf;
+}
+
+.container-bg.dark {
+    background-color: #000;
+}
+
+.container {
+    .winner-line.dark {
+        background-color: #ffffff;
+    }
+
+    .box.dark {
+        border: 9px solid #00205b;
+        color: #ffffff;
+    }
+}
+
+.btn-restart.dark {
+    color: #ffffff;
+}
+
+.settings-container.dark {
+    background-color: #000;
+    color: #bfbfbf;
+    border: 1px solid #00205b;
+
+    .difficulty-container {
+        
+        .btn-difficulty.dark {
+            color: #fff;
+        }
+    }
+
+    .LDZoid.dark {
+        border-top: 1px solid #ffffff;
+        border-bottom: 1px solid #ffffff;
+    }
+}
+

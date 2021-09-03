@@ -80,9 +80,6 @@
                 cursor: pointer;
             }
         }
-        .btn-difficulty.dark {
-            color: #fff;
-        }
     }
 
     .btn-reset-score {
@@ -105,13 +102,8 @@
         border-bottom: 1px solid black;
         margin-bottom: 10px;
     }
-    .LDZoid.dark {
-        border-top: 1px solid #ffffff;
-        border-bottom: 1px solid #ffffff;
-    }
-}
-.settings-container.dark {
-    background-color: #000;
-    color: #bfbfbf;
-    border: 1px solid #00205b;
+    // .LDZoid.dark {
+    //     border-top: 1px solid #ffffff;
+    //     border-bottom: 1px solid #ffffff;
+    // }
 }
