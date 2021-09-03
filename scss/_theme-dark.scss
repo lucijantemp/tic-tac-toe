@@ -1,42 +1,54 @@
+// COLORS
+$darkBlue1: #16315b;
+$darkBlue2: #00205b;
+$darkGray1: #bfbfbf;
+
+
 body.dark {
-    background-color: #16315b;
-    color: #bfbfbf;
+    background-color: $darkBlue1;
+    color: $darkGray1;
 }
 
-.container-bg.dark {
-    background-color: #000;
-}
 
-.container {
-    .winner-line.dark {
-        background-color: #ffffff;
-    }
 
-    .box.dark {
-        border: 9px solid #00205b;
-        color: #ffffff;
-    }
-}
-
-.btn-restart.dark {
-    color: #ffffff;
-}
-
+// TOP
 .settings-container.dark {
-    background-color: #000;
-    color: #bfbfbf;
-    border: 1px solid #00205b;
+    background-color: $black;
+    color: $darkGray1;
+    border: 1px solid $darkBlue2;
 
     .difficulty-container {
-        
+
         .btn-difficulty.dark {
-            color: #fff;
+            color: $white;
         }
     }
 
     .LDZoid.dark {
-        border-top: 1px solid #ffffff;
-        border-bottom: 1px solid #ffffff;
+        border-top: 1px solid $white;
+        border-bottom: 1px solid $white;
     }
 }
+
+// MID
+.container-bg.dark {
+    background-color: $black;
+}
+.container {
+    .winner-line.dark {
+        background-color: $white;
+    }
+
+    .box.dark {
+        border: 9px solid $darkBlue2;
+        color: $white;
+    }
+}
+
+// BOT
+.btn-restart.dark {
+    color: $white;
+}
+
+
 
