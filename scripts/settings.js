@@ -7,10 +7,8 @@ import {DOM} from './DOM.js'
 export const Settings = (() => {
 
     let mode // default, bot
-    let botDifficulty // easy, medium, hard
-    let levels = ["easy", "medium", "hard"]
 
-
+    // toggles settings container when settings btn is clicked
     const _toggleSettings = () => {
         switch (getComputedStyle(DOM.settingsContainer).zIndex) {
             case "1":
@@ -22,6 +20,7 @@ export const Settings = (() => {
         }
     }
 
+    // sets a theme based on change theme checkbox
     const _setTheme = () => {
         if (DOM.cboxChangeTheme.checked == true) {
             // add 'dark' class name to specific elements
@@ -46,6 +45,7 @@ export const Settings = (() => {
         }
     }
 
+    // changes a mode variable based on bot checkbox 
     const _setMode = () => {
         if (DOM.cboxBot.checked == true) {
             Settings.mode  = "bot"
@@ -54,6 +54,7 @@ export const Settings = (() => {
         }
     }
 
+    // changes a difficulty based on previous one
     const _changeDifficulty = () => {
         switch (DOM.btnDifficulty.innerHTML) {
             case "EASY":
@@ -69,6 +70,7 @@ export const Settings = (() => {
         _setDifficulty()
     }
 
+    // sets a difficulty based on difficulty button text
     const _setDifficulty = () => {
         switch (DOM.btnDifficulty.innerHTML) {
             case "EASY":
@@ -83,6 +85,7 @@ export const Settings = (() => {
         }
     }
 
+    // resets a score
     const _resetScore = () => {
         DOM.score0.innerHTML = "_"
         DOM.score1.innerHTML = "_"

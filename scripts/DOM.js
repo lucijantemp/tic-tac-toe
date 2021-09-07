@@ -27,7 +27,7 @@ export const DOM = (() => {
         let box = document.createElement("button")
         box.innerHTML = symbol
         box.classList.add("box")
-        // will be useful when we click the box to know position of it to change on the background board
+        // will be useful in many cases
         box.id = position
         return box
     }

@@ -11,6 +11,7 @@ export const GameBoard = (() => {
         ["", "", ""]
     ]
 
+    // removes spesififc borders on each box so it forms tic tac toe board
     const _removeBorders = () => {
         DOM.boxes().forEach(box => {
             // remove top and bottom borders
@@ -34,6 +35,7 @@ export const GameBoard = (() => {
         })
     }
 
+    // generates new html board
     const generateBoardDOM = () => {
         // delete old boxes if there are any
         DOM.boxes().forEach(box => box.remove())
@@ -47,6 +49,7 @@ export const GameBoard = (() => {
         _removeBorders()
     }
 
+    // clears the board
     const clearBoard = () => {
         DOM.boxes().forEach(box => {box.innerHTML = ""})
         for (let i=0; i<gameboard.length; i++) {
@@ -56,6 +59,7 @@ export const GameBoard = (() => {
         }
     }
 
+    // dissallows any click on board
     const freeze = () => {
         DOM.boxes().forEach(box => {
             box.disabled = true
