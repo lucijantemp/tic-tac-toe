@@ -42,7 +42,6 @@ export const GameBoard = (() => {
             for (let j=0; j<gameboard[0].length; j++) {
                 // create and add box on each iteration
                 DOM.container.appendChild(DOM.createBox(gameboard[i][j], `${i}${j}`))
-
             }
         }
         _removeBorders()
@@ -64,6 +63,7 @@ export const GameBoard = (() => {
     }
 
     // functions for checking winner (return winner if there is any, otherwise return false)
+    
     // checks rows for winner
     const _checkRows = () => {
         for (let i=0; i<gameboard.length; i++) {
@@ -114,11 +114,48 @@ export const GameBoard = (() => {
     const checkWin = () => {
         return (_checkRows() || _checkCols() || _checkDiags())
     }
+
+    // displays winner line based on win postition
+    const displayWinLine = () => {
+        // update winner line based on position of win (3 same elements in a row, col or diag)
+        DOM.winnerLine.style.display = 'block'
+        setTimeout(() => DOM.winnerLine.style.opacity = '1', 100)
+        switch (checkWin()[1]) {
+            case 'row-0':
+                DOM.winnerLine.style.top = '16.667%'
+                break
+            case 'row-1':
+                DOM.winnerLine.style.top = '50%'
+                break
+            case 'row-2':
+                DOM.winnerLine.style.top = '83.333%'
+                break    
+            case 'column-0':
+                DOM.winnerLine.style.transform = 'rotate(90deg)'
+                DOM.winnerLine.style.left = '-33.333%'
+                break
+            case 'column-1':
+                DOM.winnerLine.style.transform = 'rotate(90deg)'
+                DOM.winnerLine.style.left = '0'
+                break
+            case 'column-2':
+                DOM.winnerLine.style.transform = 'rotate(90deg)'
+                DOM.winnerLine.style.left = '33.333%'
+                break
+            case 'diagonal-asc':
+                DOM.winnerLine.style.transform = 'rotate(135deg)'
+                break
+            case 'diagonal-desc':
+                DOM.winnerLine.style.transform = 'rotate(45deg)'
+                break
+        }
+    }
+
     // returns true if board is full and nobody won (tie)
     const checkTie = () => {
         return Array.from(DOM.boxes()).every(box => box.innerHTML != "")
     }
 
     // Public API, returning only necesarry props and funcs
-    return {gameboard, checkWin, checkTie, generateBoardDOM, clearBoard, freeze}
+    return {gameboard, checkWin, checkTie, generateBoardDOM, clearBoard, freeze, displayWinLine}
 })()

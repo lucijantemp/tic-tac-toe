@@ -18,6 +18,8 @@ export const DOM = (() => {
     const btnSettings = document.querySelector(".btn-settings")
     const settingsContainer = document.querySelector(".settings-container")
     const cboxChangeTheme = document.querySelector(".checkbox-change-theme")
+    const cboxBot = document.querySelector(".bot")
+    const btnDifficulty = document.querySelector(".btn-difficulty")
     const btnResetScore = document.querySelector(".btn-reset-score")
 
     // creates and returns box node object
@@ -31,6 +33,6 @@ export const DOM = (() => {
     }
 
     return  {container, boxes, msg, score0, score1, winnerLine, btnSettings, settingsContainer, cboxChangeTheme, 
-            btnResetScore, createBox, btnRestart}
+            cboxBot, btnDifficulty, btnResetScore, createBox, btnRestart}
 })()
 
